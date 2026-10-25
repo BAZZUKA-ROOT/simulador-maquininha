@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Simulador PagSeguro - Loja Sandra Modas</title>
+<style>
+:root{--green:#20b757;--green2:#128f43;--dark:#075235;--bg:#f5f7f6;--text:#263238;--muted:#66757f;--line:#e6e9e8;--yellow:#f7d645;--shadow:0 12px 35px rgba(0,0,0,.12)}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
+.app{max-width:520px;margin:0 auto;background:#fff;min-height:100vh;box-shadow:0 0 40px rgba(0,0,0,.08)}
+.header{background:linear-gradient(135deg,#55c946,#15a84f);color:#fff;padding:22px 18px 20px;position:sticky;top:0;z-index:5;box-shadow:0 4px 16px rgba(18,143,67,.25)}
+.topline{display:flex;align-items:center;gap:12px}.back{font-size:34px;line-height:1}.title{font-size:24px;font-weight:800;letter-spacing:-.4px}.subtitle{margin:10px 0 0;font-size:14px;opacity:.95}.badge{display:inline-flex;gap:6px;align-items:center;margin-top:12px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:8px 11px;font-weight:700;font-size:13px}
+.content{padding:18px}.valueBox{background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:var(--shadow);margin-bottom:16px}.label{font-size:14px;font-weight:800;color:#455a64;margin-bottom:8px}.moneyWrap{display:flex;align-items:center;border:2px solid var(--green);border-radius:18px;background:#fafffc;overflow:hidden}.prefix{font-size:24px;font-weight:900;padding-left:16px;color:var(--dark)}input{width:100%;border:0;outline:0;background:transparent;padding:15px 14px;font-size:34px;font-weight:900;color:var(--dark);letter-spacing:-1px}
+.selected{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.chip{border-radius:16px;background:#effaf3;border:1px solid #ccefd9;padding:12px}.chip span{display:block;color:#5c6b72;font-size:12px;font-weight:700}.chip b{display:block;margin-top:4px;color:#0b6f3c;font-size:15px}
+.summary{background:linear-gradient(160deg,#053a2a,#0a7544 52%,#18aa59);color:#fff;border-radius:24px;padding:18px;margin-bottom:16px;box-shadow:var(--shadow);position:relative;overflow:hidden}.summary:after{content:"";position:absolute;width:150px;height:150px;right:-55px;bottom:-70px;background:rgba(247,214,69,.35);border-radius:50%}.summary>*{position:relative;z-index:1}.small{opacity:.84;font-weight:700;font-size:14px}.big{font-size:42px;font-weight:950;letter-spacing:-1.5px;margin:5px 0}.line{font-size:18px;font-weight:850}.mini{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.mini div{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:16px;padding:12px}.mini span{display:block;font-size:12px;opacity:.82}.mini b{display:block;margin-top:4px;font-size:18px}
+.hint{font-size:16px;line-height:1.35;color:#5d686d;margin:18px 2px 12px}.parcels{background:#fff;border-radius:22px;box-shadow:var(--shadow);overflow:hidden;border:1px solid var(--line)}.parcel{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:17px 16px;border-bottom:1px solid var(--line);cursor:pointer;background:#fff}.parcel:last-child{border-bottom:0}.parcel.active{background:#f2fff6;box-shadow:inset 5px 0 0 var(--green)}.parcelMain{font-size:24px;font-weight:500;color:#20292e}.parcelMain b{font-weight:900}.parcelTotal{font-size:16px;color:#68777e;margin-top:4px}.arrow{font-size:32px;color:#08799c;font-weight:400}.parcel.active .arrow{color:var(--green2)}.footer{padding:14px 18px 22px;color:#7d8a90;text-align:center;font-size:12px;line-height:1.4}.actions{display:flex;gap:10px;margin-top:14px}.btn{flex:1;border:0;border-radius:16px;padding:14px 12px;font-weight:900;font-size:15px;color:#073b28;background:linear-gradient(135deg,var(--yellow),#fff1a3);box-shadow:0 8px 18px rgba(247,214,69,.28);cursor:pointer}.btn.secondary{background:#eef3f0;box-shadow:none;color:#35464e}.details{margin-top:12px;border:1px solid var(--line);border-radius:16px;padding:12px;background:#fbfdfc}.details summary{font-weight:900;color:#0b6f3c;cursor:pointer}.taxgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:11px}.taxgrid label{font-size:12px;font-weight:800;color:#54636a}.taxgrid input{font-size:16px;font-weight:800;padding:10px;border:1px solid #d8e1dd;border-radius:12px;background:#fff;color:#102a3a}
+@media(min-width:850px){.app{max-width:760px}.content{display:grid;grid-template-columns:.86fr 1.14fr;gap:18px}.valueBox,.summary{margin-bottom:0}.parcels{grid-column:1/3}.hint{grid-column:1/3}.footer{grid-column:1/3}.header{border-radius:0 0 28px 28px}.parcelMain{font-size:25px}}
+@media(max-width:380px){.title{font-size:21px}.big{font-size:36px}input{font-size:30px}.selected,.mini{grid-template-columns:1fr}.parcelMain{font-size:22px}}
+@media print{.header,.actions,.details,.footer{display:none}.app{box-shadow:none}.summary,.valueBox,.parcels{box-shadow:none}.content{display:block}.summary{color:#000;background:#fff;border:1px solid #ddd}.mini div{background:#fff;color:#000;border:1px solid #ddd}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="header">
+    <div class="topline"><div class="back">‹</div><div class="title">Número de parcelas</div></div>
+    <div class="subtitle">Digite apenas o valor que a loja precisa receber líquido.</div>
+    <div class="badge">✓ Crédito parcelado na hora já selecionado</div>
+  </header>
+  <main class="content">
+    <section class="valueBox">
+      <div class="label">Valor que a loja quer receber</div>
+      <div class="moneyWrap"><span class="prefix">R$</span><input id="valor" inputmode="decimal" value="100,00" autocomplete="off"></div>
+      <div class="selected">
+        <div class="chip"><span>Opção fixa</span><b>Crédito parcelado</b></div>
+        <div class="chip"><span>Recebimento</span><b>Na hora</b></div>
+      </div>
+      <div class="actions"><button class="btn" onclick="window.print()">Imprimir</button><button class="btn secondary" onclick="limpar()">Limpar</button></div>
+      <details class="details">
+        <summary>Taxas configuradas</summary>
+        <div class="taxgrid" id="taxasBox"></div>
+      </details>
+    </section>
+    <section class="summary">
+      <div class="small">Cliente paga</div>
+      <div class="big" id="total">R$ 0,00</div>
+      <div class="line" id="linha">1x de R$ 0,00</div>
+      <div class="mini">
+        <div><span>Você recebe</span><b id="recebe">R$ 0,00</b></div>
+        <div><span>Taxas</span><b id="taxas">R$ 0,00</b></div>
+      </div>
+    </section>
+    <div class="hint">Corresponde em como o cliente fará o pagamento. Toque em uma parcela para selecionar.</div>
+    <section class="parcels" id="parcelas"></section>
+    <div class="footer">Simulador particular da Loja Sandra Modas. Configurado para receber líquido com crédito parcelado na hora.</div>
+  </main>
+</div>
+<script>
+const brl = new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'});
+const storageKey='taxasSandraModasMobileFinalV1';
+const defaults={1:4.9971,2:9.9180,3:11.2925,4:12.6485,5:13.9711,6:15.2758,7:16.5554,8:17.8172,9:19.0415,10:20.2552,11:21.4524,12:22.6257};
+let taxas=JSON.parse(localStorage.getItem(storageKey)||'null')||defaults;
+let selecionada=1;
+const valorEl=document.getElementById('valor');
+function n(v){return Number(String(v).replace(/\./g,'').replace(',','.').replace(/[^0-9.]/g,''))||0}
+function calc(valor,p){let taxa=(Number(taxas[p])||0)/100;let total=valor/(1-taxa);return{total,parcela:total/p,taxa:total-valor,percent:taxa*100,recebe:valor}}
+function renderTaxas(){const box=document.getElementById('taxasBox');box.innerHTML='';for(let i=1;i<=12;i++){let d=document.createElement('div');d.innerHTML=`<label>${i}x (%)</label><input data-p="${i}" value="${String(taxas[i]).replace('.',',')}">`;box.appendChild(d)}box.querySelectorAll('input').forEach(inp=>inp.addEventListener('input',()=>{taxas[inp.dataset.p]=n(inp.value);localStorage.setItem(storageKey,JSON.stringify(taxas));atualizar()}))}
+function atualizar(){let valor=n(valorEl.value);let r=calc(valor,selecionada);document.getElementById('total').textContent=brl.format(r.total);document.getElementById('linha').textContent=selecionada+'x de '+brl.format(r.parcela);document.getElementById('recebe').textContent=brl.format(r.recebe);document.getElementById('taxas').textContent=brl.format(r.taxa);const lista=document.getElementById('parcelas');lista.innerHTML='';for(let i=1;i<=12;i++){let c=calc(valor,i);let div=document.createElement('div');div.className='parcel '+(i===selecionada?'active':'');div.innerHTML=`<div><div class="parcelMain"><b>${i}x</b> ${brl.format(c.parcela)}</div><div class="parcelTotal">Total ${brl.format(c.total)}</div></div><div class="arrow">›</div>`;div.onclick=()=>{selecionada=i;atualizar();document.querySelector('.summary').scrollIntoView({behavior:'smooth',block:'nearest'})};lista.appendChild(div)}}
+function limpar(){valorEl.value='';selecionada=1;valorEl.focus();atualizar()}
+valorEl.addEventListener('input',atualizar);valorEl.addEventListener('focus',()=>valorEl.select());renderTaxas();atualizar();
+</script>
+</body>
+</html>
